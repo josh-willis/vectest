@@ -1,0 +1,4 @@
+build/
+*.S
+*.so
+vectest.c
