@@ -41,4 +41,4 @@ the compiler).
 
 Finally, the build process will also dump the object file. Obviously you wouldn't do this in a regular Cythonized module,
 but it allows us to check that there are in fact multiple versions of the `vfunc_fmv` function inside, and only one of the
-simple `vfunc` function. Once can also inspect to see what has been vectorized and what not, if one wants.
+simple `vfunc` function. One can also inspect to see what has been vectorized and what not, if one wants.
