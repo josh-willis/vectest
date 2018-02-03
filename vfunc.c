@@ -32,3 +32,24 @@ void vfunc(float * __restrict__ a, float * __restrict__ b, float * __restrict__ 
   }
   return;
 }
+
+__attribute__((target_clones("avx2","avx","sse4.2","default")))
+void vsin_fmv(float * __restrict__ a, size_t arrlen){
+  size_t i;
+
+  for (i=0; i<arrlen; i++){
+    a[i] = sin(a[i]);
+  }
+  return;
+}
+  
+void vsin(float * __restrict__ a, size_t arrlen){
+  size_t i;
+
+  for (i=0; i<arrlen; i++){
+    a[i] = sin(a[i]);
+  }
+  return;
+}
+  
+

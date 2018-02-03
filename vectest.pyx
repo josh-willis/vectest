@@ -6,6 +6,8 @@ cimport numpy
 cdef extern from "vfunc.c":
   void vfunc(float* a, float* b, float* c, size_t alen) 
   void vfunc_fmv(float* a, float* b, float* c, size_t alen) 
+  void vsin(float *a, size_t arrlen)
+  void vsin_fmv(float *a, size_t arrlen)
 
 @cython.boundscheck(False)
 @cython.wraparound(False)
@@ -37,6 +39,35 @@ def vecfunc_fmv(numpy.ndarray[float, ndim=1, mode="c"] a not None,
     vfunc_fmv(&a[0], &b[0], &c[0], arrlen)
 
     return None
+
+@cython.boundscheck(False)
+@cython.wraparound(False)
+def vecsin_fmv(numpy.ndarray[float, ndim=1, mode="c"] a not None):
+
+#    if (a.shape != b.shape) or (b.shape != c.shape):
+#        raise ValueError("Array size mis-match")
+
+    cdef size_t arrlen
+    arrlen = a.shape[0]
+
+    vsin_fmv(&a[0], arrlen)
+
+    return None
+
+@cython.boundscheck(False)
+@cython.wraparound(False)
+def vecsin(numpy.ndarray[float, ndim=1, mode="c"] a not None):
+
+#    if (a.shape != b.shape) or (b.shape != c.shape):
+#        raise ValueError("Array size mis-match")
+
+    cdef size_t arrlen
+    arrlen = a.shape[0]
+
+    vsin(&a[0], arrlen)
+
+    return None
+
 
 def zeros_aligned(n, dtype, bytes_aligned):
     d = numpy.dtype(dtype)

@@ -11,6 +11,6 @@ setup(
     ext_modules = [Extension("vectest",
                              sources=["vectest.pyx"],
                              extra_compile_args=[ '-O3', '-w', '-fopt-info-vec',
-                                                  '-ffast-math', '-ffinite-math-only'],                             
+                                                  '-ffast-math', '-ffinite-math-only', '-lm'],                             
                              include_dirs=[numpy.get_include()])],
 )

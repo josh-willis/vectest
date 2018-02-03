@@ -18,6 +18,12 @@ def wrapped_nofmv():
 def wrapped_fmv():
     vectest.vecfunc_fmv(a,b,c)
 
+def wrapped_sin_nofmv():
+    vectest.vecsin(b)
+
+def wrapped_sin_fmv():
+    vectest.vecsin_fmv(b)
+
 if __name__ == '__main__':
     import timeit
     print "Applying function using non-multiversioned code, vectest.vecfunc(a,b,c):"
@@ -42,3 +48,15 @@ if __name__ == '__main__':
     t2_list =t2.repeat(repeat=nrepeats, number = nloops)
     t2best_usec = min(t2_list)*1e6/nloops
     print "{0} loops, best of {1}: {2} usec per loop".format(nloops, nrepeats, t2best_usec)
+
+    print "\nTiming non-multiversioned vector sine:"
+    t3 = Timer(wrapped_sin_nofmv)
+    t3_list =t3.repeat(repeat=nrepeats, number = nloops)
+    t3best_usec = min(t3_list)*1e6/nloops
+    print "{0} loops, best of {1}: {2} usec per loop".format(nloops, nrepeats, t3best_usec)
+
+    print "\nTiming multiversioned code:"
+    t4 = Timer(wrapped_sin_fmv)
+    t4_list =t4.repeat(repeat=nrepeats, number = nloops)
+    t4best_usec = min(t4_list)*1e6/nloops
+    print "{0} loops, best of {1}: {2} usec per loop".format(nloops, nrepeats, t4best_usec)
