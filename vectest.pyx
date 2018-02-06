@@ -6,6 +6,7 @@ cimport numpy
 cdef extern from "vfunc.c":
   void vfunc(float* a, float* b, float* c, size_t alen) 
   void vfunc_fmv(float* a, float* b, float* c, size_t alen) 
+  void vfunc_slow(float* a, float* b, float* c, size_t alen) 
   void vsin(float *a, size_t arrlen)
   void vsin_fmv(float *a, size_t arrlen)
 
@@ -21,6 +22,21 @@ def vecfunc(numpy.ndarray[float, ndim=1, mode="c"] a not None,
     arrlen = a.shape[0]
 
     vfunc(&a[0], &b[0], &c[0], arrlen)
+
+    return None
+
+@cython.boundscheck(False)
+@cython.wraparound(False)
+def vecfunc_slow(numpy.ndarray[float, ndim=1, mode="c"] a not None,
+                 numpy.ndarray[float, ndim=1, mode="c"] b not None,
+                 numpy.ndarray[float, ndim=1, mode="c"] c not None):
+#    if (a.shape != b.shape) or (b.shape != c.shape):
+#        raise ValueError("Array size mis-match")
+
+    cdef size_t arrlen
+    arrlen = a.shape[0]
+
+    vfunc_slow(&a[0], &b[0], &c[0], arrlen)
 
     return None
 
