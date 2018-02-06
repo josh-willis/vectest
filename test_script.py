@@ -52,7 +52,7 @@ if __name__ == '__main__':
     t2best_usec = min(t2_list)*1e6/nloops
     print "{0} loops, best of {1}: {2} usec per loop".format(nloops, nrepeats, t2best_usec)
 
-    print "Timing slow (no 'restrict') code:"
+    print "\nTiming slow (no 'restrict') code:"
     t0 = Timer(wrapped_slow)
     t0_list =t0.repeat(repeat=nrepeats, number = nloops)
     t0best_usec = min(t0_list)*1e6/nloops
