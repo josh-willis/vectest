@@ -18,6 +18,9 @@ def wrapped_nofmv():
 def wrapped_fmv():
     vectest.vecfunc_fmv(a,b,c)
 
+def wrapped_fmv_r():
+    vectest.vecfunc_fmv_r(a,b,c)
+
 def wrapped_slow():
     vectest.vecfunc_slow(a,b,c)
 
@@ -46,13 +49,19 @@ if __name__ == '__main__':
     t1best_usec = min(t1_list)*1e6/nloops
     print "{0} loops, best of {1}: {2} usec per loop".format(nloops, nrepeats, t1best_usec)
 
-    print "\nTiming multiversioned code:"
+    print "\nTiming multiversioned code (simple, no 'restrict', 'assume_aligned', or disabling Python syntax):"
     t2 = Timer(wrapped_fmv)
     t2_list =t2.repeat(repeat=nrepeats, number = nloops)
     t2best_usec = min(t2_list)*1e6/nloops
     print "{0} loops, best of {1}: {2} usec per loop".format(nloops, nrepeats, t2best_usec)
 
-    print "\nTiming slow (no 'restrict') code:"
+    print "\nTiming multiversioned code:"
+    t2a = Timer(wrapped_fmv_r)
+    t2a_list =t2a.repeat(repeat=nrepeats, number = nloops)
+    t2abest_usec = min(t2a_list)*1e6/nloops
+    print "{0} loops, best of {1}: {2} usec per loop".format(nloops, nrepeats, t2abest_usec)
+
+    print "\nTiming slow (no 'restrict', no FMV) code:"
     t0 = Timer(wrapped_slow)
     t0_list =t0.repeat(repeat=nrepeats, number = nloops)
     t0best_usec = min(t0_list)*1e6/nloops
