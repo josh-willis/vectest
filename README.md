@@ -15,7 +15,8 @@ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 ```
 To build, you just need to type `make`, from within a Python environment that has `numpy` and `Cython`.
-You can check the performance difference by running the test script, yielding for example on a 3.5 GHz Haswell:
+You can check the performance difference by running the test script, yielding for example on a 3.5 GHz Haswell
+(Intel(R) Xeon(R) CPU E3-1240 v5):
 ```
 $ ./test_script.py 
 Applying function using non-multiversioned code, vectest.vecfunc(a,b,c):
